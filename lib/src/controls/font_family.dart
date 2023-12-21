@@ -1,4 +1,3 @@
-import 'package:enough_platform_widgets/enough_platform_widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../models.dart';
@@ -26,10 +25,9 @@ class _FontFamilyDropdownState extends State<FontFamilyDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    final api = HtmlEditorApiWidget.of(context)!.editorApi
-      ..onFontFamilyChanged = _onFontNameChanged;
+    final api = HtmlEditorApiWidget.of(context)!.editorApi..onFontFamilyChanged = _onFontNameChanged;
     const selectedTextStyle = TextStyle(fontSize: 12);
-    return PlatformDropdownButton<SafeFont>(
+    return DropdownButton<SafeFont>(
       value: currentFont,
       onTap: api.storeSelectionRange,
       onChanged: (value) async {
@@ -41,6 +39,7 @@ class _FontFamilyDropdownState extends State<FontFamilyDropdown> {
           await api.setFont(value);
         }
       },
+      underline: const SizedBox(),
       selectedItemBuilder: (context) => SafeFont.values
           .map(
             (font) => Center(

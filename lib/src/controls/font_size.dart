@@ -26,60 +26,65 @@ class _FontSizeDropdownState extends State<FontSizeDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    final api = HtmlEditorApiWidget.of(context)!.editorApi
-      ..onFontSizeChanged = _onFontSizeChanged;
-    const selectedTextStyle = TextStyle(fontSize: 12);
-    return PlatformDropdownButton<FontSize>(
-      value: currentSize,
-      onTap: api.storeSelectionRange,
-      onChanged: (value) async {
-        await api.restoreSelectionRange();
-        if (value != null) {
-          setState(() {
-            currentSize = value;
-          });
-          await api.setFontSize(value);
-        }
-      },
-      selectedItemBuilder: (context) => const [
-        Center(child: Text('7', style: selectedTextStyle)),
-        Center(child: Text('10', style: selectedTextStyle)),
-        Center(child: Text('12', style: selectedTextStyle)),
-        Center(child: Text('14', style: selectedTextStyle)),
-        Center(child: Text('18', style: selectedTextStyle)),
-        Center(child: Text('24', style: selectedTextStyle)),
-        Center(child: Text('32', style: selectedTextStyle)),
-      ],
-      items: const [
-        DropdownMenuItem<FontSize>(
-          child: Text('7', style: TextStyle(fontSize: 10)),
-          value: FontSize.xSmall,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('10', style: TextStyle(fontSize: 12)),
-          value: FontSize.small,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('12', style: TextStyle(fontSize: 14)),
-          value: FontSize.medium,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('14', style: TextStyle(fontSize: 16)),
-          value: FontSize.large,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('18', style: TextStyle(fontSize: 18)),
-          value: FontSize.xLarge,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('24', style: TextStyle(fontSize: 20)),
-          value: FontSize.xxLarge,
-        ),
-        DropdownMenuItem<FontSize>(
-          child: Text('32', style: TextStyle(fontSize: 24)),
-          value: FontSize.xxxLarge,
-        ),
-      ],
+    final api = HtmlEditorApiWidget.of(context)!.editorApi..onFontSizeChanged = _onFontSizeChanged;
+    const selectedTextStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.w600);
+    return Container(
+      width: 38,
+      alignment: Alignment.center,
+      child: DropdownButton<FontSize>(
+        value: currentSize,
+        onTap: api.storeSelectionRange,
+        onChanged: (value) async {
+          await api.restoreSelectionRange();
+          if (value != null) {
+            setState(() {
+              currentSize = value;
+            });
+            await api.setFontSize(value);
+          }
+        },
+        icon: const SizedBox(width: 8),
+        underline: const SizedBox(),
+        selectedItemBuilder: (context) => const [
+          Center(child: Text('7', style: selectedTextStyle)),
+          Center(child: Text('10', style: selectedTextStyle)),
+          Center(child: Text('12', style: selectedTextStyle)),
+          Center(child: Text('14', style: selectedTextStyle)),
+          Center(child: Text('18', style: selectedTextStyle)),
+          Center(child: Text('24', style: selectedTextStyle)),
+          Center(child: Text('32', style: selectedTextStyle)),
+        ],
+        items: const [
+          DropdownMenuItem<FontSize>(
+            child: Text('7', style: TextStyle(fontSize: 10)),
+            value: FontSize.xSmall,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('10', style: TextStyle(fontSize: 12)),
+            value: FontSize.small,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('12', style: TextStyle(fontSize: 14)),
+            value: FontSize.medium,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('14', style: TextStyle(fontSize: 16)),
+            value: FontSize.large,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('18', style: TextStyle(fontSize: 18)),
+            value: FontSize.xLarge,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('24', style: TextStyle(fontSize: 20)),
+            value: FontSize.xxLarge,
+          ),
+          DropdownMenuItem<FontSize>(
+            child: Text('32', style: TextStyle(fontSize: 24)),
+            value: FontSize.xxxLarge,
+          ),
+        ],
+      ),
     );
   }
 }

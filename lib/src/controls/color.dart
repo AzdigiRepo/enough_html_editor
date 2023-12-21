@@ -47,7 +47,7 @@ class ColorControls extends StatelessWidget {
         ColorPickerControl(
           color: Colors.black,
           themeColors: colors,
-          icon: const Icon(Icons.text_format),
+          icon: const Icon(Icons.text_format, color: Colors.black),
           getColor: (setting) => setting.textForeground,
           setColor: (color, api) => api.setColorTextForeground(color),
         ),
@@ -55,7 +55,7 @@ class ColorControls extends StatelessWidget {
         ColorPickerControl(
           color: Colors.white,
           themeColors: colors,
-          icon: const Icon(Icons.brush),
+          icon: const Icon(Icons.brush, color: Colors.black),
           getColor: (setting) => setting.textBackground,
           setColor: (color, api) => api.setColorTextBackground(color),
         ),
@@ -64,7 +64,7 @@ class ColorControls extends StatelessWidget {
           ColorPickerControl(
             color: Colors.black,
             themeColors: colors,
-            icon: const Icon(Icons.text_fields),
+            icon: const Icon(Icons.text_fields, color: Colors.black),
             setColor: (color, api) => api.setColorDocumentForeground(color),
           ),
           // document background:
@@ -98,8 +98,7 @@ class ColorPickerControl extends StatefulWidget {
     this.getColor,
     this.builder,
     this.icon,
-  })  : assert(builder != null || icon != null,
-            'Please specify either an builder or an icon'),
+  })  : assert(builder != null || icon != null, 'Please specify either an builder or an icon'),
         super(key: key);
 
   /// The current color
@@ -137,8 +136,7 @@ class _ColorPickerControlState extends State<ColorPickerControl> {
 
   void _onColorChanged(ColorSetting colorSetting) {
     final color = widget.getColor?.call(colorSetting);
-    if (color == _currentColor ||
-        (color == null && _currentColor == widget.color)) {
+    if (color == _currentColor || (color == null && _currentColor == widget.color)) {
       // ignore
       return;
     }

@@ -31,11 +31,10 @@ class _LinkButtonState extends State<LinkButton> {
   @override
   Widget build(BuildContext context) {
     final api = HtmlEditorApiWidget.of(context)!.editorApi;
-    final buttonColor =
-        _isInLink ? Theme.of(context).colorScheme.secondary : null;
+    final buttonColor = _isInLink ? Theme.of(context).colorScheme.secondary : null;
     api.onLinkSettingsChanged = _onLinkSettingsChanged;
     return DensePlatformIconButton(
-      icon: const Icon(Icons.link),
+      icon: const Icon(Icons.link, color: Colors.black),
       onPressed: () => _editLink(api),
       color: buttonColor,
     );
@@ -115,9 +114,7 @@ class _LinkEditorState extends State<LinkEditor> {
   @override
   void initState() {
     super.initState();
-    _previewText = widget.textController.text.isEmpty
-        ? widget.urlController.text
-        : widget.textController.text;
+    _previewText = widget.textController.text.isEmpty ? widget.urlController.text : widget.textController.text;
   }
 
   @override
@@ -154,8 +151,7 @@ class _LinkEditorState extends State<LinkEditor> {
           PlatformTextButton(
             child: Text(_previewText),
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(url)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(url)));
             },
           ),
         ],
@@ -171,9 +167,7 @@ class _LinkEditorState extends State<LinkEditor> {
 
   void _updatePreview() {
     setState(() {
-      _previewText = widget.textController.text.isNotEmpty
-          ? widget.textController.text
-          : widget.urlController.text;
+      _previewText = widget.textController.text.isNotEmpty ? widget.textController.text : widget.urlController.text;
     });
   }
 }

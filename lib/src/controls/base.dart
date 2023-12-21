@@ -1,4 +1,5 @@
 import 'package:enough_platform_widgets/enough_platform_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../editor.dart';
@@ -25,9 +26,7 @@ import 'controls.dart';
 class HtmlEditorApiWidget extends InheritedWidget {
   /// Creates a new HtmlEditorApiWidget
   /// with the specified [editorApi] and [child]
-  const HtmlEditorApiWidget(
-      {Key? key, required this.editorApi, required Widget child})
-      : super(key: key, child: child);
+  const HtmlEditorApiWidget({Key? key, required this.editorApi, required Widget child}) : super(key: key, child: child);
 
   /// The editor API
   final HtmlEditorApi editorApi;
@@ -67,8 +66,7 @@ class HtmlEditorControls extends StatefulWidget {
     this.suffix,
     this.themeColors,
     this.excludeDocumentLevelControls = false,
-  })  : assert(editorApi != null || editorKey != null,
-            'Please define either the editorApi or editorKey parameter.'),
+  })  : assert(editorApi != null || editorKey != null, 'Please define either the editorApi or editorKey parameter.'),
         super(key: key);
 
   /// The key for the editor state
@@ -120,6 +118,7 @@ class _HtmlEditorControlsState extends State<HtmlEditorControls> {
         width: size.width,
         height: 50,
         child: Material(
+          color: const Color(0xFF818396).withOpacity(0.05),
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
@@ -127,12 +126,16 @@ class _HtmlEditorControlsState extends State<HtmlEditorControls> {
                 prefix,
               },
               const BaseFormatButtons(),
-              DensePlatformIconButton(
-                icon: const Icon(Icons.format_list_bulleted),
+              CupertinoButton(
+                minSize: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: const Icon(Icons.format_list_bulleted, color: Colors.black),
                 onPressed: () => _editorApi.insertUnorderedList(),
               ),
-              DensePlatformIconButton(
-                icon: const Icon(Icons.format_list_numbered),
+              CupertinoButton(
+                minSize: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: const Icon(Icons.format_list_numbered, color: Colors.black),
                 onPressed: () => _editorApi.insertOrderedList(),
               ),
               const FontSizeDropdown(),
@@ -140,8 +143,7 @@ class _HtmlEditorControlsState extends State<HtmlEditorControls> {
               const AlignDropdown(),
               ColorControls(
                 themeColors: widget.themeColors,
-                excludeDocumentLevelControls:
-                    widget.excludeDocumentLevelControls,
+                excludeDocumentLevelControls: widget.excludeDocumentLevelControls,
               ),
               const LinkButton(),
               if (suffix != null) ...{

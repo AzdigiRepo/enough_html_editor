@@ -1,5 +1,4 @@
 import 'package:enough_platform_widgets/enough_platform_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models.dart';
@@ -30,16 +29,16 @@ class _BaseFormatButtonsState extends State<BaseFormatButtons> {
 
   @override
   Widget build(BuildContext context) {
-    final api = HtmlEditorApiWidget.of(context)!.editorApi
-      ..onFormatSettingsChanged = _onFormatSettingsChanged;
+    final api = HtmlEditorApiWidget.of(context)!.editorApi..onFormatSettingsChanged = _onFormatSettingsChanged;
 
-    return PlatformToggleButtons(
+    return CupertinoMultipleSegmentedControl(
       children: [
-        Icon(CommonPlatformIcons.bold),
-        Icon(CommonPlatformIcons.italic),
-        Icon(CommonPlatformIcons.underlined),
-        Icon(CommonPlatformIcons.strikethrough),
+        Icon(CommonPlatformIcons.bold, color: Colors.black),
+        Icon(CommonPlatformIcons.italic, color: Colors.black),
+        Icon(CommonPlatformIcons.underlined, color: Colors.black),
+        Icon(CommonPlatformIcons.strikethrough, color: Colors.black),
       ],
+      borderColor: const Color(0xFFbdbdbd),
       onPressed: (index) {
         switch (index) {
           case 0:
@@ -60,7 +59,6 @@ class _BaseFormatButtonsState extends State<BaseFormatButtons> {
         });
       },
       isSelected: isSelected,
-      cupertinoPadding: const EdgeInsets.symmetric(horizontal: 8.0),
     );
   }
 }
